@@ -1,1 +1,6 @@
 *.mcs
+*.o
+*.err
+*.DBK
+/01. Pisca Led/*.map
+*.PWI
