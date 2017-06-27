@@ -1,6 +1,6 @@
 #include <p18f4520.h>
 
-//#pragma config OSC = INTOSCIO_EC    /// EXTERN CLOCK 8MHZ
+
 #pragma config PBADEN=OFF
 
 
