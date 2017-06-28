@@ -16,20 +16,22 @@ void envia_comando(unsigned char);
 void envia_caracter(unsigned char);
 void lcd_configura();
 void lcd_inicializa();
-void deley();
+void deley_s();
 void deley15_ms();
 void pulse_enable();
 int contar(char *);
 void printf(char *);
 
 
-void deley(){
+
+void deley_s(){
 	long int i;
-	for(i = 0; i < 32000; i++){}
+	for(i = 0; i < 320000; i++){}
 }
+
 void deley15_ms(){
 	int i;
-	for(i = 0; i < 900; i++){}
+	for(i = 0; i < 5000; i++){}
 
 }
 /*
@@ -42,14 +44,13 @@ void lcd_configura(){
 	TRIS_LCD_EN = 0;
 }
 
+
 void envia_comando(unsigned char comando){
 	LCD_RS = 0b0; 
 	LCD_RW = 0b0;
 	LCD_EN = 0b0;
 
-	LCD_DADOS &= 0xf0;
-	LCD_DADOS |= (comando & 0x0f);
-
+	LCD_DADOS = comando;
 	pulse_enable();
 
 }
@@ -63,14 +64,22 @@ void lcd_inicializa()
 	LCD_RS = 0; 
 	LCD_RW = 0;
 	LCD_EN = 0;	
-	envia_comando(0b0011);
-	envia_comando(0b0011);
-	envia_comando(0b0011);
-	envia_comando(0b0010);
-	envia_comando(0b0010);
-	envia_comando(0b0001);
-	envia_comando(0b0000);
-	envia_comando(0b1111);
+	LCD_DADOS = 0b0011;
+	pulse_enable();
+	LCD_DADOS = 0b0011;
+	pulse_enable();
+	LCD_DADOS = 0b0011;
+	pulse_enable();
+	LCD_DADOS = 0b0010;
+	pulse_enable();
+	LCD_DADOS = 0b0010;
+	pulse_enable();
+	LCD_DADOS = 0b0001;
+	pulse_enable();
+	LCD_DADOS = 0b0000;
+	pulse_enable();
+	LCD_DADOS = 0b1111;
+	pulse_enable();
 
 	
 }
@@ -118,7 +127,9 @@ void main(){
 	int i, tamanho;
 	char str[16] = "Ola, Sena";
 	TRISB = 0b00000000;
-	ADCON1=0x0F;
+	ADCON1 =0x0F;
+	OSCCON = 0b01100010;
+	//OSCCON = 0b01110010;//16Mhz
 	
 	lcd_configura();
 	lcd_inicializa();
@@ -128,9 +139,10 @@ void main(){
 	
 	while(1){
 		PORTB = 0b00000000;
-		deley();
-		PORTB = 0b11111111;
-		deley();
+		deley_s();
+		PORTB = 0b00000001;
+		deley_s();
+
 	}
 
 
