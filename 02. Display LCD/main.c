@@ -117,8 +117,7 @@ void printf(char *str){
 void main(){
 	int i, tamanho;
 	char str[16] = "Ola, Sena";
-	
-	OSCCON=0b01100010;
+	TRISB = 0b00000000;
 	ADCON1=0x0F;
 	
 	lcd_configura();
@@ -128,7 +127,10 @@ void main(){
 
 	
 	while(1){
-	
+		PORTB = 0b00000000;
+		deley();
+		PORTB = 0b11111111;
+		deley();
 	}
 
 
