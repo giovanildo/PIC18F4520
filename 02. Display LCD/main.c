@@ -18,6 +18,9 @@ void lcd_configura();
 void lcd_inicializa();
 void deley();
 void deley15_ms();
+void pulse_enable();
+int contar(char *);
+void printf(char *);
 
 
 void deley(){
@@ -47,9 +50,7 @@ void envia_comando(unsigned char comando){
 	LCD_DADOS &= 0xf0;
 	LCD_DADOS |= (comando & 0x0f);
 
-	LCD_EN = 0b1;
-	deley15_ms();
-	LCD_EN = 0b0;
+	pulse_enable();
 
 }
 
@@ -74,19 +75,57 @@ void lcd_inicializa()
 	
 }
 
+void pulse_enable(){
+	LCD_EN = 0b1;
+	deley15_ms();
+	LCD_EN = 0b0;
+}
 void envia_caracter(unsigned char caracter){
 	LCD_RS = 0b1; 
 	LCD_RW = 0b0;
 	LCD_EN = 0b0;
 
+	LCD_DADOS &= 0xf0;
+	LCD_DADOS |= (caracter >> 4);
+	pulse_enable();
+
+	LCD_DADOS &= 0xf0;
+	LCD_DADOS |= (caracter & 0x0f);
+	pulse_enable();
+
+}
+int contar(char *str){
+	int max = 16;
+	int i;
+	for(i = 0; i < max; i++){
+		if(str[i] == '\0'){
+			return i;
+		}
+	}
+	return i;
+}
+
+void printf(char *str){
+	int tamanho, i;
+	tamanho = contar(str);
+	for(i = 0; i < tamanho; i++){
+		envia_caracter(str[i]);
+
+	}
 }
 
 void main(){
-	lcd_configura();
-	lcd_inicializa();
+	int i, tamanho;
+	char str[16] = "Ola, Sena";
 	
 	OSCCON=0b01100010;
 	ADCON1=0x0F;
+	
+	lcd_configura();
+	lcd_inicializa();
+	
+	printf(str);
+
 	
 	while(1){
 	
