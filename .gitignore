@@ -4,3 +4,5 @@
 *.DBK
 /01. Pisca Led/*.map
 *.PWI
+*.mcp
+*.mcw
