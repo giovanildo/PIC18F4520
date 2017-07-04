@@ -20,18 +20,18 @@ void deley_s();
 void deley15_ms();
 void pulse_enable();
 int contar(char *);
-void printf(char *);
+void printf(char *); 
 
 
 
 void deley_s(){
-	long int i;
-	for(i = 0; i < 320000; i++){}
+	unsigned long int i;
+	for(i = 0; i < 32000; i++){}
 }
 
 void deley15_ms(){
-	int i;
-	for(i = 0; i < 5000; i++){}
+	unsigned long int i;
+	for(i = 0; i < 3200; i++){}
 
 }
 /*
@@ -74,14 +74,22 @@ void lcd_inicializa()
 	pulse_enable();
 	LCD_DADOS = 0b0010;
 	pulse_enable();
-	LCD_DADOS = 0b0001;
+	LCD_DADOS = 0b1000;
 	pulse_enable();
 	LCD_DADOS = 0b0000;
 	pulse_enable();
 	LCD_DADOS = 0b1111;
 	pulse_enable();
 
-	
+	LCD_DADOS = 0b0000;
+	pulse_enable();
+	LCD_DADOS = 0b110;
+	pulse_enable();
+
+	LCD_DADOS = 0b0000;
+	pulse_enable();
+	LCD_DADOS = 0b0001;
+	pulse_enable();
 }
 
 void pulse_enable(){
@@ -104,7 +112,7 @@ void envia_caracter(unsigned char caracter){
 
 }
 int contar(char *str){
-	int max = 16;
+	int max = 20;
 	int i;
 	for(i = 0; i < max; i++){
 		if(str[i] == '\0'){
@@ -125,25 +133,48 @@ void printf(char *str){
 
 void main(){
 	int i, tamanho;
-	char str[16] = "Ola, Sena";
-	TRISB = 0b00000000;
-	ADCON1 =0x0F;
+	char str[20] = "Olá, Dona Sara!";
+	char str2[16] = "Tem o que pra";
+	char str3[16] = " merendar?";
+
 	OSCCON = 0b01100010;
-	//OSCCON = 0b01110010;//16Mhz
+	ADCON1 =0x0F;
+	TRISBbits.TRISB0 = 0;	
 	
-	lcd_configura();
-	lcd_inicializa();
-	
-	printf(str);
+	PORTBbits.RB0 = 0;
+	deley15_ms(); 
+	PORTBbits.RB0 = 1; 	
+	deley15_ms(); 
+	PORTBbits.RB0 = 0;
+	deley_s(); 
+	PORTBbits.RB0 = 1; 	
+	deley_s(); 
 
-	
+
+
 	while(1){
-		PORTB = 0b00000000;
-		deley_s();
-		PORTB = 0b00000001;
-		deley_s();
 
+	
+		lcd_configura();
+		lcd_inicializa();
+		printf(str);
+		
+	
+		deley_s();
+		lcd_configura();
+		lcd_inicializa();
+		printf(str2);
+	
+		deley_s();
+		lcd_configura();
+		lcd_inicializa();
+		printf(str3);
+	
+
+		PORTBbits.RB0 = 0;
+		deley_s(); 
+		PORTBbits.RB0 = 1; 	
+		deley_s(); 
 	}
-
 
 }
