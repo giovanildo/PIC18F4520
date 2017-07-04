@@ -64,38 +64,24 @@ void lcd_inicializa()
 	LCD_RS = 0; 
 	LCD_RW = 0;
 	LCD_EN = 0;	
-	LCD_DADOS = 0b0011;
-	pulse_enable();
-	LCD_DADOS = 0b0011;
-	pulse_enable();
-	LCD_DADOS = 0b0011;
-	pulse_enable();
-	LCD_DADOS = 0b0010;
-	pulse_enable();
-	LCD_DADOS = 0b0010;
-	pulse_enable();
-	LCD_DADOS = 0b1000;
-	pulse_enable();
-	LCD_DADOS = 0b0000;
-	pulse_enable();
-	LCD_DADOS = 0b1111;
-	pulse_enable();
-
-	LCD_DADOS = 0b0000;
-	pulse_enable();
-	LCD_DADOS = 0b110;
-	pulse_enable();
-
-	LCD_DADOS = 0b0000;
-	pulse_enable();
-	LCD_DADOS = 0b0001;
-	pulse_enable();
+	envia_comando(0b0011);
+	envia_comando(0b0011);
+	envia_comando(0b0011);
+	envia_comando(0b0010);
+	envia_comando(0b0010);
+	envia_comando(0b1000);
+	envia_comando(0b0000);
+	envia_comando(0b1111);
+	envia_comando(0b0000);
+	envia_comando(0b0110);
+	envia_comando(0b0000);
+	envia_comando(0b0001);
 }
 
 void pulse_enable(){
 	LCD_EN = 0b1;
-	deley15_ms();
 	LCD_EN = 0b0;
+	deley15_ms();
 }
 void envia_caracter(unsigned char caracter){
 	LCD_RS = 0b1; 
@@ -133,9 +119,9 @@ void printf(char *str){
 
 void main(){
 	int i, tamanho;
-	char str[20] = "Olá, Dona Sara!";
-	char str2[16] = "Tem o que pra";
-	char str3[16] = " merendar?";
+	char str[20] = "Maria Victoria !";
+	char str2[16] = "de Sousa Mareano ";
+	char str3[16] = " EST, a Lindona das Tapiocas";
 
 	OSCCON = 0b01100010;
 	ADCON1 =0x0F;
