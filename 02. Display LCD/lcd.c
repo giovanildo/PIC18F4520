@@ -26,7 +26,6 @@ void envia_comando(unsigned char comando){
 	LCD_RS = 0b0; 
 	LCD_RW = 0b0;
 	LCD_EN = 0b0;
-
 	LCD_DADOS = comando;
 	pulse_enable();
 
@@ -37,10 +36,6 @@ void envia_comando(unsigned char comando){
  */
 void lcd_inicializa()
 { 
-	LCD_DADOS = 0b0000;
-	LCD_RS = 0; 
-	LCD_RW = 0;
-	LCD_EN = 0;	
 	envia_comando(0b0011);
 	envia_comando(0b0011);
 	envia_comando(0b0011);
@@ -87,6 +82,7 @@ int contar(char *str){
 
 void printf(char *str){
 	int tamanho, i;
+	lcd_inicializa();
 	tamanho = contar(str);
 	for(i = 0; i < tamanho; i++){
 		envia_caracter(str[i]);

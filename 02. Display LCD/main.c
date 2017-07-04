@@ -9,18 +9,13 @@ void main(){
 	char str2[16] = "Tudo certo?";
 	OSCCON = 0b01100010;
 	ADCON1 =0x0F;
+	lcd_configura();
 
 	while(1){
-
-		lcd_configura();
-		lcd_inicializa();
 		printf(str);
-
 		deley_s();
-		lcd_configura();
-		lcd_inicializa();
 		printf(str2);
-	
+		deley_s();
 	}
 
 }
