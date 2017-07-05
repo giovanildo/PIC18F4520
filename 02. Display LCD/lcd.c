@@ -3,12 +3,12 @@
 
 void deley_s(){
 	unsigned long int i;
-	for(i = 0; i < 32000; i++){}
+	for(i = 0; i < 45000; i++){}
 }
 
 void deley15_ms(){
 	unsigned long int i;
-	for(i = 0; i < 3200; i++){}
+	for(i = 0; i < 40; i++){}
 
 }
 /*
