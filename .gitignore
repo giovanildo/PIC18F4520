@@ -6,3 +6,6 @@
 *.PWI
 *.mcp
 *.mcw
+*.cof
+*.hex
+/02. Display LCD/*.map
