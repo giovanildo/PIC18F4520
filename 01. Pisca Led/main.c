@@ -1,6 +1,7 @@
 #include <p18f4520.h>
 
 
+#pragma config OSC = INTIO67
 #pragma config PBADEN=OFF
 
 
