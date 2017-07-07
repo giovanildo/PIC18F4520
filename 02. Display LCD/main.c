@@ -1,6 +1,8 @@
 #include <p18f4520.h>
 #include "lcd.h"
 
+
+#pragma config OSC = INTIO67
 #pragma config PBADEN=OFF
 
 void main(){
