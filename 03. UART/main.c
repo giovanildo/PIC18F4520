@@ -5,14 +5,18 @@
 #include <stdlib.h>
 #include "lcd.h"
 
+#pragma config OSC = INTIO67
 #pragma config PBADEN=OFF
+
 
 #pragma interrupt ISR_alta_prioridade
 void ISR_alta_prioridade(void){
-	char str[16] = "Teste2";
-	str[0] = getcUSART();
-	
+	unsigned char c;
+	char str[16] = "Usuario:";
 	printj(str);
+	c = getcUSART();
+	envia_caracter(c);
+
 }
 
 
@@ -22,9 +26,10 @@ void int_alta(void){
 }
 #pragma code
 
+void configuraUsart(){
 
 
-
+}
 
 void main(){
 	int i, tamanho;
@@ -35,12 +40,11 @@ void main(){
 	TRISC = 0b10111111;
 
 	lcd_configura();
-	printj("Teste");
 	
-    // Configure Capture1
 	OpenCapture1( C1_EVERY_4_RISE_EDGE &
  	CAPTURE_INT_OFF );
- // Configure Timer3
+ 
+
 	OpenTimer3( TIMER_INT_OFF &
 	T3_SOURCE_INT );
 
@@ -49,11 +53,8 @@ void main(){
 	USART_ASYNCH_MODE &
 	USART_EIGHT_BIT &
 	USART_CONT_RX,
-	129 );
+	25);
 	
-	baudUSART(BAUD_8_BIT_RATE
-	&BAUD_AUTO_OFF
-	&BAUD_WAKEUP_OFF);
 	
 	IPR1bits.RCIP = 1;
 	RCONbits.IPEN = 1;

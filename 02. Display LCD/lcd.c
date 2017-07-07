@@ -8,7 +8,7 @@ void deley_s(){
 
 void deley15_ms(){
 	unsigned long int i;
-	for(i = 0; i < 40; i++){}
+	for(i = 0; i < 50; i++){}
 
 }
 /*

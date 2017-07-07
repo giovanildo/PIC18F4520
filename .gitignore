@@ -9,3 +9,5 @@
 *.cof
 *.hex
 /02. Display LCD/*.map
+*.map
+*.SDF
