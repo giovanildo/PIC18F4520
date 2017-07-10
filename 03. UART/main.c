@@ -12,8 +12,6 @@
 #pragma interrupt ISR_alta_prioridade
 void ISR_alta_prioridade(void){
 	unsigned char c;
-	char str[16] = "Usuario:";
-	printj(str);
 	c = getcUSART();
 	envia_caracter(c);
 
@@ -34,7 +32,7 @@ void configuraUsart(){
 void main(){
 	int i, tamanho;
 	char str[20] = "Ola, Mundo!";
-	char str2[16] = "Tudo certo?";
+	char str2[16] = "";
 	OSCCON = 0b01100010;
 	ADCON1 =0x0F;
 	TRISC = 0b10111111;
@@ -60,17 +58,23 @@ void main(){
 	RCONbits.IPEN = 1;
 	INTCONbits.GIEH = 1;
 	INTCONbits.GIEL = 1;
+	
+	deley_s();
+	printj(str);
+	deley_s();	
+	lcd_inicializa();
 
-
-		
-
+	putcUSART('c');
 	while(1){
-		printj(str);
-		deley_s();
-		deley_s();
 		printj(str2);
-		deley_s();
-		deley_s();
+		deley_s();	
+		deley_s();	
+		deley_s();	
+		deley_s();	
+		deley_s();	
+		deley_s();	
+		printj(str2);
+
 	}
 
 }
