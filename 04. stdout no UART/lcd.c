@@ -3,12 +3,12 @@
 
 void deley_s(){
 	unsigned long int i;
-	for(i = 0; i < 40000; i++){}
+	for(i = 0; i < 45000; i++){}
 }
 
 void deley15_ms(){
 	unsigned long int i;
-	for(i = 0; i < 100; i++){}
+	for(i = 0; i < 50; i++){}
 
 }
 /*
@@ -80,7 +80,7 @@ int contar(char *str){
 	return i;
 }
 
-void printd(char *str){
+void printj(char *str){
 	int tamanho, i;
 	lcd_inicializa();
 	tamanho = contar(str);
