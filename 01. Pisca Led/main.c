@@ -27,7 +27,7 @@ void main(){
 	ADCON1=0x0F;
 	TRISB = 0b11111110;
 	while(1){
-		pisca_led();		
+		pisca_led();
 	}
 
 

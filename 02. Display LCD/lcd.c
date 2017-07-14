@@ -80,7 +80,7 @@ int contar(char *str){
 	return i;
 }
 
-void printd(char *str){
+void printj(char *str){
 	int tamanho, i;
 	lcd_inicializa();
 	tamanho = contar(str);

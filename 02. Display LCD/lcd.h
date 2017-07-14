@@ -21,6 +21,6 @@ void deley_s();
 void deley15_ms();
 void pulse_enable();
 int contar(char *);
-void printf(char *); 
+void printj(char *); 
 
 #endif

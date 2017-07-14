@@ -14,10 +14,10 @@ void main(){
 	lcd_configura();
 
 	while(1){
-		printf(str);
+		printj(str);
 		deley_s();
 		deley_s();
-		printf(str2);
+		printj(str2);
 		deley_s();
 		deley_s();
 	}
